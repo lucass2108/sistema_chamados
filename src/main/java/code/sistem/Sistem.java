@@ -6,6 +6,7 @@ import code.model.Status;
 import code.model.TipoSolicitacao;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Sistem {
@@ -44,28 +45,34 @@ public class Sistem {
 
     public void atualizarStatus(int id) {
         try {
-            for (Solicitacao solicitacoe : solicitacoes) {
-                if (solicitacoe.getId() == id) {
-                    switch (solicitacoe.getStatus()) {
+            Iterator<Solicitacao> solicitacaoIterator = solicitacoes.iterator();
+
+            while (solicitacaoIterator.hasNext()) {
+                Solicitacao solicitacao = solicitacaoIterator.next();
+
+                if (solicitacao.getId() == id) {
+                    switch (solicitacao.getStatus()) {
                         case ABERTO:
-                            solicitacoe.setStatus(Status.EM_ANDAMENTO);
-                            System.out.println("Staus atualizado de ABERTO para EM_ANDAMENTO");
+                            solicitacao.setStatus(Status.EM_ANDAMENTO);
+                            System.out.println("Status atualizado de ABERTO para EM_ANDAMENTO");
                             break;
                         case EM_ANDAMENTO:
-                            solicitacoe.setStatus(Status.FINALIZADO);
+                            solicitacao.setStatus(Status.FINALIZADO);
                             System.out.println("Status atualizado de EM_ANDAMENTO para FINALIZADO");
-                            System.out.println("Solicitação de ID-" + id + " foi FINALIZADA sendo retirada da fila de solicitações e adicionada ao histórico de solicitações disponível na função LISTAR");
-                            solicitacoes.remove(solicitacoe);
-                            solicitacoesFinalizado.add(solicitacoe);
+                            System.out.println("Solicitação de ID-" + id + " foi FINALIZADA sendo retirada da fila de solicitações e adicionada ao hitórico disponível na função LISTAR");
+
+                            solicitacaoIterator.remove();
+                            solicitacoesFinalizado.add(solicitacao);
                             break;
                         case FINALIZADO:
-                            System.out.println("Solicitação já atendida");
+                            System.out.println("Solicitaçõa já atendida");
                             break;
                     }
+                    break;
                 }
             }
         } catch (Exception e) {
-            System.out.println("Não foi possível atender, tente novamente mais tarde");
+            e.printStackTrace();
         }
     }
 }

@@ -32,7 +32,7 @@ public class Solicitacao {
                 '}';
     }
 
-        public String toStringFinalizado() {
+    public String toStringFinalizado() {
         return "Solicitacao{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
