@@ -1,7 +1,7 @@
-package teste;
+package code.teste;
 
-import model.TipoSolicitacao;
-import sistem.Sistem;
+import code.model.TipoSolicitacao;
+import code.sistem.Sistem;
 
 public class Teste {
     static void main(String[] args) {

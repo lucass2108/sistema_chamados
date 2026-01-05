@@ -1,4 +1,4 @@
-package model;
+package code.model;
 
 public enum TipoSolicitacao {
     MATERIAL,

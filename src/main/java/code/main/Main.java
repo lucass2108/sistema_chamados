@@ -1,10 +1,9 @@
-package main;
+package code.main;
 
-import exeception.ArgumentoInvalidoException;
-import model.TipoSolicitacao;
-import sistem.Sistem;
+import code.exeception.ArgumentoInvalidoException;
+import code.model.TipoSolicitacao;
+import code.sistem.Sistem;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
