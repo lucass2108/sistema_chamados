@@ -4,11 +4,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Solicitacao {
-    private int id;
-    private String nome;
-    private TipoSolicitacao tipoSolicitacao;
-    private String descricao;
-    private LocalDateTime localDateTime = LocalDateTime.now();
+    private final int id;
+    private final String nome;
+    private final TipoSolicitacao tipoSolicitacao;
+    private final String descricao;
+    private final LocalDateTime localDateTime = LocalDateTime.now();
     private LocalDateTime dataFinalizada;
     public DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MMMM/yyyy HH:mm:ss");
     private Status status = Status.ABERTO;
@@ -27,12 +27,12 @@ public class Solicitacao {
                 ", nome='" + nome + '\'' +
                 ", tipoSolicitacao=" + tipoSolicitacao +
                 ", descricao='" + descricao + '\'' +
-                ", localDateTime=" + localDateTime.format(formatter) +
+                ", localDateTime=" + localDateTime +
                 ", status=" + status +
                 '}';
     }
 
-    public String toStringFinalizado() {
+        public String toStringFinalizado() {
         return "Solicitacao{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
@@ -42,10 +42,6 @@ public class Solicitacao {
                 ", dataFinalizada=" + dataFinalizada +
                 ", status=" + status +
                 '}';
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public Status getStatus() {

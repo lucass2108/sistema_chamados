@@ -21,6 +21,10 @@ public class Sistem {
         if (descricao == null)
             throw new ArgumentoInvalidoException("A solicitação deve ter uma descrição precisa");
 
+        Solicitacao temporario = new Solicitacao(nome, tipoSolicitacao, descricao, id);
+        System.out.println(temporario);
+        temporario = null;
+
         solicitacoes.add(new Solicitacao(nome, tipoSolicitacao, descricao, id));
         id++;
     }
