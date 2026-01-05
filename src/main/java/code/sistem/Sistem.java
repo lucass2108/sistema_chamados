@@ -6,6 +6,7 @@ import code.model.Status;
 import code.model.TipoSolicitacao;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Sistem {
@@ -44,17 +45,31 @@ public class Sistem {
 
     public void atualizarStatus(int id) {
         try {
-            solicitacoes.get(id - 1);
-            if (solicitacoes.get(id - 1).getStatus() == Status.ABERTO) {
-                solicitacoes.get(id - 1).setStatus(Status.EM_ANDAMENTO);
-                System.out.println("Status atualizado de ABERTO para EM_ANDAMENTO");
-            } else if (solicitacoes.get(id - 1).getStatus() == Status.EM_ANDAMENTO) {
-                solicitacoes.get(id - 1).setStatus(Status.FINALIZADO);
-                System.out.println("Status atualizado de EM_ANDAMENTO para FINALIZADO");
-                Solicitacao solicitacao = solicitacoes.get(id - 1);
-                solicitacoesFinalizado.add(solicitacao);
-                System.out.println("Solicitação de ID-" + id + " foi FINALIZADA sendo retirada da fila de solicitações e adicionada ao histórico de solicitações disponível na função LISTAR");
-                solicitacoes.remove(id - 1);
+            Iterator<Solicitacao> solicitacaoIterator = solicitacoes.iterator();
+
+            while (solicitacaoIterator.hasNext()) {
+                Solicitacao solicitacao = solicitacaoIterator.next();
+
+                if (solicitacao.getId() == id) {
+                    switch (solicitacao.getStatus()) {
+                        case ABERTO:
+                            solicitacao.setStatus(Status.EM_ANDAMENTO);
+                            System.out.println("Status atualizado de ABERTO para EM_ANDAMENTO");
+                            break;
+                        case EM_ANDAMENTO:
+                            solicitacao.setStatus(Status.FINALIZADO);
+                            System.out.println("Status atualizado de EM_ANDAMENTO para FINALIZADO");
+                            System.out.println("Solicitação de ID-" + id + " foi FINALIZADA sendo retirada da fila de solicitações e adicionada ao hitórico disponível na função LISTAR");
+
+                            solicitacaoIterator.remove();
+                            solicitacoesFinalizado.add(solicitacao);
+                            break;
+                        case FINALIZADO:
+                            System.out.println("Solicitaçõa já atendida");
+                            break;
+                    }
+                    break;
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

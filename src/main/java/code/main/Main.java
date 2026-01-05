@@ -48,7 +48,6 @@ public class Main {
                         scanner.nextLine();
 
                         sistem.atualizarStatus(in);
-                        System.out.println("ok");
 
                         break;
                     default:

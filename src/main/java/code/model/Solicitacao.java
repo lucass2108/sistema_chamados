@@ -59,4 +59,8 @@ public class Solicitacao {
     public void setDataFinalizada(LocalDateTime dataFinalizada) {
         this.dataFinalizada = dataFinalizada;
     }
+
+    public int getId() {
+        return id;
+    }
 }
