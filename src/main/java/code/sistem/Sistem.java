@@ -44,20 +44,28 @@ public class Sistem {
 
     public void atualizarStatus(int id) {
         try {
-            solicitacoes.get(id - 1);
-            if (solicitacoes.get(id - 1).getStatus() == Status.ABERTO) {
-                solicitacoes.get(id - 1).setStatus(Status.EM_ANDAMENTO);
-                System.out.println("Status atualizado de ABERTO para EM_ANDAMENTO");
-            } else if (solicitacoes.get(id - 1).getStatus() == Status.EM_ANDAMENTO) {
-                solicitacoes.get(id - 1).setStatus(Status.FINALIZADO);
-                System.out.println("Status atualizado de EM_ANDAMENTO para FINALIZADO");
-                Solicitacao solicitacao = solicitacoes.get(id - 1);
-                solicitacoesFinalizado.add(solicitacao);
-                System.out.println("Solicitação de ID-" + id + " foi FINALIZADA sendo retirada da fila de solicitações e adicionada ao histórico de solicitações disponível na função LISTAR");
-                solicitacoes.remove(id - 1);
+            for (Solicitacao solicitacoe : solicitacoes) {
+                if (solicitacoe.getId() == id) {
+                    switch (solicitacoe.getStatus()) {
+                        case ABERTO:
+                            solicitacoe.setStatus(Status.EM_ANDAMENTO);
+                            System.out.println("Staus atualizado de ABERTO para EM_ANDAMENTO");
+                            break;
+                        case EM_ANDAMENTO:
+                            solicitacoe.setStatus(Status.FINALIZADO);
+                            System.out.println("Status atualizado de EM_ANDAMENTO para FINALIZADO");
+                            System.out.println("Solicitação de ID-" + id + " foi FINALIZADA sendo retirada da fila de solicitações e adicionada ao histórico de solicitações disponível na função LISTAR");
+                            solicitacoes.remove(solicitacoe);
+                            solicitacoesFinalizado.add(solicitacoe);
+                            break;
+                        case FINALIZADO:
+                            System.out.println("Solicitação já atendida");
+                            break;
+                    }
+                }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Não foi possível atender, tente novamente mais tarde");
         }
     }
 }
